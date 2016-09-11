@@ -1,0 +1,94 @@
+
+html,
+body {
+    height: 100%;
+}
+
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+footer {
+    margin: 50px 0;
+}
+.header-text {
+    position: absolute;
+    top: 20%;
+    left: 1.8%;
+    right: auto;
+    width: 96.66666666666666%;
+    color: #fff;
+}
+
+.header-text h2 {
+    font-size: 60px;
+}
+
+.header-text h2 span {
+    /*background-color: #2980b9;*/
+    padding: 10px;
+}
+
+.header-text h3 span {
+    background-color: #000000c2;
+    padding: 10px;
+}
+
+.btn-min-block {
+    min-width: 170px;
+    line-height: 26px;
+}
+
+.btn-theme {
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin-right: 15px;
+}
+
+.btn-theme:hover {
+    color: #000;
+    background-color: #fff;
+    border-color: #fff;
+}
+/*scroll*/
+.main {
+    height: 100%;
+}
+section{
+    min-height: 650px;
+    width: 100%;
+}
+.login-form {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    /*margin-top: 30%;*/
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    padding: 10%;
+    padding-top: 5%;
+    /*text-align: center;*/
+}
+.login-form .message {
+    text-align: center;
+    color: ‪#‎b3b3b3‬;
+    font-size: 12px;
+}
