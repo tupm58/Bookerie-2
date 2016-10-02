@@ -90,6 +90,13 @@ class User extends MY_Controller
                 redirect(site_url('User/index/?err=fail'));
             }
         }
-
     }
+
+    function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(site_url('user'));
+    }
+
+  
 }

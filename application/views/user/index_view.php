@@ -30,7 +30,7 @@
 <body>
 
 <!-- Navigation -->
-<div class="navbar navbar-warning navbar-fixed-top" style="margin-bottom: 0;background-color: #14100d">
+<div class="navbar navbar-warning navbar-fixed-top" style="margin-bottom: 0;background-color: #0a2123">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
@@ -45,7 +45,7 @@
                 <li class=""><a href="#about">About</a></li>
                 <li class=""><a href="#register">I am new one</a></li>
                 <li class=""><a href="#login">Let me log in</a></li>
-                <li class=""><a href="<?php echo site_url('post/my_post'); ?>">Bài viết của tôi</a></li>
+                <li class=""><a href="<?php echo site_url('post/my_post'); ?>">Enroll now!!</a></li>
             </ul>
         </div>
     </div>

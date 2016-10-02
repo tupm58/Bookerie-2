@@ -20,7 +20,17 @@ class MY_Controller extends CI_Controller
     
     protected function _load_header()
     {
-        $this->load->view('header_view');
+        $header = array();
+        $header['title'] = isset($data['title']) ? $data['title'] : "";
+        $header['meta'] = isset($data['meta']) ? $data['meta'] : "";
+        $header['module'] = $this->_module;
+        $header['username'] = $this->_session_uname();
+
+        $this->load->view('header_view',$header);
+    }
+    protected function _load_left()
+    {
+        $this->load->view('left_view');
     }
     protected function _session_uname(){
         $uname = trim($this->session->userdata('username')); //lay session ra
@@ -28,8 +38,13 @@ class MY_Controller extends CI_Controller
     }
     protected function _session_uid(){
         $user_id = trim($this->session->userdata('userid'));
-        $user_id = isIdNumber($user_id) ? $user_id: 0;
+//        $user_id = isIdNumber($user_id) ? $user_id: 0;
         return $user_id;
+    }
+    protected function _is_login(){
+        $user_id = $this->_session_uid();
+        $uname = $this->_session_uname();
+        return ($user_id > 0 && $uname != '') ? TRUE : FALSE;
     }
     
 }

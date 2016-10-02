@@ -26,7 +26,8 @@
     </script>
 </head>
 <body>
-<div class="navbar navbar-warning">
+
+<div class="navbar navbar-warning  navbar-fixed-top" style="margin-bottom: 0;background-color: #0a2123">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
@@ -34,25 +35,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="javascript:void(0)">Brand</a>
+            <a class="navbar-brand" href="javascript:void(0)">Bookerie</a>
         </div>
         <div class="navbar-collapse collapse navbar-warning-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="javascript:void(0)">Active</a></li>
-                <li><a href="javascript:void(0)">Link</a></li>
-                <li class="dropdown">
-                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                        <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">Action</a></li>
-                        <li><a href="javascript:void(0)">Another action</a></li>
-                        <li><a href="javascript:void(0)">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Dropdown header</li>
-                        <li><a href="javascript:void(0)">Separated link</a></li>
-                        <li><a href="javascript:void(0)">One more separated link</a></li>
-                    </ul>
-                </li>
+                <li class="<?php echo ($module === 'home') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">Home</a></li>
+                <li class="<?php echo ($module === 'baivietcuatoi') ? 'active' : ''; ?>"><a href="<?php echo site_url('post/my_post'); ?>">My Posts</a></li>
+
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -60,21 +49,25 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:void(0)">Link</a></li>
                 <li class="dropdown">
-                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                        <b class="caret"></b></a>
+
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0">
+                        <!--                        <img src="--><?php //echo base_url()."uploads/images/avatar/default.png"; ?><!--" style="margin:0;width: 30px;height: 30px;" class="avatar">-->
+                        <?php echo $username; ?>
+                        <b class="caret"></b>
+
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">Action</a></li>
-                        <li><a href="javascript:void(0)">Another action</a></li>
-                        <li><a href="javascript:void(0)">Something else here</a></li>
+                        <li><a href="<?php echo site_url('user/profile'); ?>">Settings</a></li>
                         <li class="divider"></li>
-                        <li><a href="javascript:void(0)">Separated link</a></li>
+                        <li><a href="<?php echo site_url('user/logout'); ?>">Log out</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </div>
+
+
 <?php flush();?>
 <!--load nhanh hơn-->

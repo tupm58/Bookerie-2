@@ -1,3 +1,6 @@
+body{
+
+}
 #card-post{
     /*-webkit-box-shadow: none;*/
     /*-moz-box-shadow: none;*/
@@ -161,4 +164,7 @@ textarea{
 
 .testp {
     display: none;
+}
+.form-group {
+    margin: 0 0 0 0;
 }

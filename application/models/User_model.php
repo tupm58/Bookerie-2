@@ -32,4 +32,14 @@ class User_model extends CI_Model
         $data = $query->row_array();
         return $data;
     }
+
+    function find_user_by_id($id){
+        $data = array();
+        $this->db->select('*');
+        $this->db->where('user_id',$id);
+        $this->db->from('user');
+        $query = $this->db->get();
+        $data = $query->row_array();
+        return $data;
+    }
 }
