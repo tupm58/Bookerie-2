@@ -23,4 +23,17 @@ class Comment_model extends CI_Model
         return $check_flag;
     }
 
+    function load_comment($post_id)
+    {
+        $this->db->select('*');
+        $this->db->from('comment');
+        $this->db->where('post_id',$post_id);
+        $this->db->join('user','comment.user_id = user.user_id');
+        $this->db->join('post','comment.post_id = post.post_id');
+
+        $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
+    }
+
 }

@@ -14,6 +14,9 @@ class Post extends MY_Controller
         parent::__construct();
         $this->load->model('Post_model');
         $this->load->model('User_model');
+        $this->load->model('Comment_model');
+       // $this->load->controller('Comment_model');
+
         $this->load->helper(array('form', 'security'));
         $this->load->library('form_validation');
         //$this->_check_login();
@@ -36,6 +39,7 @@ class Post extends MY_Controller
         
         $user_id = $this->_session_uid();
         $this->User_model->find_user_by_id($user_id);
+     //   $this->Comment_model->load_comment();
         $data = array();
         $data['post'] = $this->Post_model->load_all_posts();
         $this->load->view("post/index_view.php",$data);// load view

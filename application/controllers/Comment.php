@@ -20,6 +20,13 @@ class Comment extends MY_Controller
         //$this->_check_login();
     }
 
+    function index()
+    {
+//        $data = array();
+//        $data['comment'] = $this->Comment_model->load_comment();
+//        $this->load->view("post/index_view.php",$data);// load view
+//        echo $data;
+    }
     function add_comment()
     {
         if ($this->input->is_ajax_request()) {
@@ -34,6 +41,11 @@ class Comment extends MY_Controller
             );
             $add = $this->Comment_model->add_comment($data);
         }
-        
+    }
+    function load_comment($post_id)
+    {
+        $data = array();
+        $data['comment'] = $this->Comment_model->load_comment($post_id);
+        $this->load->view("post/index_view.php",$data);// load view
     }
 }

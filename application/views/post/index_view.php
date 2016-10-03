@@ -14,7 +14,7 @@
             <br>
             <div class="row">
                 <img class="col-md-1 col-md-offset-3"  src="<?php echo base_url()."uploads/images/avatar/default.png"; ?>" alt="Loading image...">
-                <!--                <div class="col-md-1 col-md-offset-2">--><?php //echo $p['username']; ?><!--</div>-->
+                                <div class="col-md-1 col-md-offset-2"><?php echo $p['username']; ?></div>
                 <div class="col-md-6 ">
                     <div class="card" id="card-post">
                         <!--                        <div class="card-height-indicator" ></div>-->
@@ -43,15 +43,24 @@
 
                                 <div class="actionBox">
                                     <ul class="commentList">
+                                        <?php if(isset($comment)){
+                                            foreach ($comment as $c){
+
+                                        ?>
                                         <li>
                                             <div class="commenterImage">
                                                 <img src="http://placekitten.com/50/50" />
                                             </div>
                                             <div class="commentText">
-                                                <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+                                                <p class=""><?php echo $c['post_id']; ?></p> <span class="date sub-text">on March 5th, 2014</span>
 
                                             </div>
                                         </li>
+                                        <?php
+
+                                            }
+                                        }
+                                        ?>
                                     </ul>
                                     <div class="row">
                                         <div class="col-md-10 ">

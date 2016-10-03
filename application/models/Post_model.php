@@ -28,6 +28,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+//        $this->db->join('comment','comment.comment_id = post.comment_id');
         $query = $this->db->get();
         $data = $query->result_array();
         return $data;
