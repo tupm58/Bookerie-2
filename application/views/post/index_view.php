@@ -10,16 +10,17 @@
     <div>
 
         <?php foreach($post as $p): ?>
-
             <br>
             <div class="row">
                 <img class="col-md-1 col-md-offset-3"  src="<?php echo base_url()."uploads/images/avatar/default.png"; ?>" alt="Loading image...">
-                                <div class="col-md-1 col-md-offset-2"><?php echo $p['username']; ?></div>
+<!--                                <div class="col-md-1 col-md-offset-2">--><?php //echo $p['username']; ?><!--</div>-->
                 <div class="col-md-6 ">
                     <div class="card" id="card-post">
                         <!--                        <div class="card-height-indicator" ></div>-->
                         <div class="card-content" style="position: inherit !important; min-height: 100%">
+                            <a href="<?php echo base_url('/post/post_detail/').$p['post_id']; ?>">
                             <div class="card-image">
+
                                 <?php
                                 if ($p['image']){
                                     ?>
@@ -29,6 +30,7 @@
                                 ?>
                                 <h3 class="card-image-headline"><?php echo $p['name']?></h3>
                             </div>
+                            </a>
                             <div class="card-body"  >
                                 <h4><b><?php echo $p['name']?></b></h4>
                                 <p><?php echo $p['description']; ?></p>
@@ -43,24 +45,21 @@
 
                                 <div class="actionBox">
                                     <ul class="commentList">
-                                        <?php if(isset($comment)){
-                                            foreach ($comment as $c){
-
-                                        ?>
+                                    <?php
+                                        foreach ($p['comments'] as $comment){
+                                    ?>
                                         <li>
                                             <div class="commenterImage">
-                                                <img src="http://placekitten.com/50/50" />
+                                                <img src="<?php echo base_url()."uploads/images/avatar/default.png"; ?>" />
                                             </div>
+                                            <b><?php echo $comment['username'];?></b>
                                             <div class="commentText">
-                                                <p class=""><?php echo $c['post_id']; ?></p> <span class="date sub-text">on March 5th, 2014</span>
+                                                <p class=""><?php echo $comment['content'];?></p> <span class="date sub-text"><?php echo $comment['time'];?></span>
 
                                             </div>
                                         </li>
-                                        <?php
-
-                                            }
-                                        }
-                                        ?>
+                                    <?php }
+                                    ?>
                                     </ul>
                                     <div class="row">
                                         <div class="col-md-10 ">

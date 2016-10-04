@@ -42,12 +42,12 @@ class Post extends MY_Controller
      //   $this->Comment_model->load_comment();
         $data = array();
         $data['post'] = $this->Post_model->load_all_posts();
+        
         $this->load->view("post/index_view.php",$data);// load view
     }
 
     function add()
     {
-
         if ($this->input->post('createPost')) {
             //   $this->_check_login();
             $name = $this->input->post('name');
@@ -99,6 +99,27 @@ class Post extends MY_Controller
                 echo "not ok";
 
             }
+        }
+    }
+    
+    function post_detail($post_id)
+    {
+        $data = $this->Post_model->get_post_detail($post_id);
+        var_dump($data);
+        $this->load->view("post/post_detail_view.php",$data);// load view
+    }
+    
+    function update($post_id)
+    {
+        
+    }
+    
+    function delete($post_id)
+    {
+        
+        $delete = $this->Post_model->delete_post($post_id);
+        if ($delete){
+            redirect(site_url('post/index'));
         }
     }
 }

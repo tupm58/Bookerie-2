@@ -42,4 +42,6 @@ class User_model extends CI_Model
         $data = $query->row_array();
         return $data;
     }
+    
+    
 }

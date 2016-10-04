@@ -28,9 +28,28 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
-//        $this->db->join('comment','comment.comment_id = post.comment_id');
         $query = $this->db->get();
         $data = $query->result_array();
+        for ($i =0 ; $i <count($data); $i++){
+            $comments = $this->Comment_model->load_comment($data[$i]['post_id']);
+            $data[$i]['comments'] = $comments;
+        }
         return $data;
+    }
+    function get_post_detail($post_id)
+    {
+        $this->db->select('*');
+        $this->db->from('post');
+        $this->db->where('post_id',$post_id);
+        $query = $this->db->get();
+        $data = $query->row_array();
+        return $data;
+    }
+    function delete_post($post_id)
+    {
+        $flag = FALSE;
+        $this->db->where('post_id',$post_id);
+        $flag = $this->db->delete('post');
+        return $flag;
     }
 }

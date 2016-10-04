@@ -46,6 +46,7 @@ class Comment extends MY_Controller
     {
         $data = array();
         $data['comment'] = $this->Comment_model->load_comment($post_id);
+        return $data;
         $this->load->view("post/index_view.php",$data);// load view
     }
 }

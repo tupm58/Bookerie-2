@@ -17,6 +17,13 @@ class User extends MY_Controller
         $this->load->helper(array('security'));
         $this->load->library('form_validation');
     }
+    private function _check_login()
+    {
+        $login = $this->_is_login();
+        if (!$login) {
+            redirect(site_url('user'));
+        }
+    }
     
     function index(){
         $this->load->view('user/index_view');
@@ -98,5 +105,36 @@ class User extends MY_Controller
         redirect(site_url('user'));
     }
 
+    function profile()
+    {
+        $this->_check_login();
+        $header = array();
+        $header['title'] = "Profile";
+        $this->_load_header($header);
+        $user_id = $this->_session_uid();
+        $data = array();
+        $data['user'] = $this->User_model->find_user_by_id($user_id);
+        $this->load->view('user/profile_view',$data);
+    }
+    function update($id)
+    {
+        $id = $this->_session_uid();
+
+    }
+    function get_user($id =0)
+    {
+        $this->_check_login();
+        $header = array();
+        $header['title'] = "Profile";
+        $this->_load_header($header);
+        $data = array();
+        $data['user'] = $this->User_model->find_user_by_id($id);
+        if ($id == $this->_session_uid()){
+            $this->load->view('user/profile_view',$data);
+        }else{
+            $this->load->view('user/other_profile_view',$data);
+        }
+
+    }
   
 }
