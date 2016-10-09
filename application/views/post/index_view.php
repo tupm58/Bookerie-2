@@ -88,7 +88,7 @@
                             <?php
                             if ($p['image']) {
                                 ?>
-                                <img src="<?php echo base_url() . $p['image']; ?>" alt="Loading image...">
+                                <img style="max-height: 600px;" src="<?php echo base_url() . $p['image']; ?>" alt="Loading image...">
                                 <?php
                             }
                             ?>
@@ -106,22 +106,22 @@
                         </div>
                         <footer class="card-footer">
                             <div style="margin-left:15px">
-<!--                                <button class="btn btn-raised btn-xs">Share</button>-->
-                                <div class="fb-share-button"
-                                     data-href="http://localhost/bookerie-2/index.php/post/<?php echo  $p['post_id']; ?>"
-                                     data-layout="button_count" data-size="small"
-                                     data-mobile-iframe="true">
-                                    <a class="fb-xfbml-parse-ignore"
-                                       target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fbookerie-2%2Findex.php%2Fpost%2F<?php echo  $p['post_id']; ?>&amp;src=sdkpreparse">
-                                        Share</a>
-                                </div>
+                                <button class="btn btn-raised btn-xs">Share</button>
+<!--                                <div class="fb-share-button"-->
+<!--                                     data-href="http://localhost/bookerie-2/index.php/post/--><?php //echo  $p['post_id']; ?><!--"-->
+<!--                                     data-layout="button_count" data-size="small"-->
+<!--                                     data-mobile-iframe="true">-->
+<!--                                    <a class="fb-xfbml-parse-ignore"-->
+<!--                                       target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fbookerie-2%2Findex.php%2Fpost%2F--><?php //echo  $p['post_id']; ?><!--&amp;src=sdkpreparse">-->
+<!--                                        Share</a>-->
+<!--                                </div>-->
                                 <button class="btn btn-raised btn-xs btn-warning"
                                         style="background-color: #18BC9C"
                                         onclick="$(this).closest('.row').find('#'+<?php echo $p['post_id'] ?>).focus()">
                                     Comments
                                 </button>
                             </div>
-
+                            <div class="date sub-text"><?php echo $p['time']; ?></div>
                             <div class="actionBox">
                                 <ul class="commentList" id="commentList<?php echo $p['post_id'];?>">
                                     <?php
@@ -292,7 +292,7 @@
                     success: function (data) {
                         alert(content);
                         $('#commentList'+post_id).append('<li> <div class="commenterImage">' +
-                        '<img src="<?php echo base_url().$useravatar; ?>" /> ' +
+                        '<img src="<?php echo base_url().$useravatar; ?>"  style="height:30px"/> ' +
                         '</div>' +
                         "<b>" + "<?php echo $username; ?>" + "</b> " +
                         "<div class='commentText'> " +

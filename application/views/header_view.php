@@ -60,7 +60,16 @@
                 <li class="dropdown">
 
                     <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top:10px;padding-bottom:10px;">
-                        <img src="<?php echo base_url().$useravatar; ?>" class="img-circle" width="41px";height="41px" style="margin-right: 8px">
+                        <?php
+                            if($useravatar==''){
+                        ?>
+                                <img src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>" class="img-circle"  style="height:40px; width:40px;margin-right: 8px">
+                                <?php
+                        }else{
+                        ?><img src="<?php echo base_url().$useravatar; ?>" class="img-circle"  style="height:40px; width:40px;margin-right: 8px">
+                                <?php
+                            }
+                        ?>
                         <?php echo $username; ?>
                         <b class="caret"></b>
 

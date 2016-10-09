@@ -85,7 +85,7 @@ class User extends MY_Controller
                 'password' => $password
             );
             $find = $this->User_model->find_user($username,$password);
-            var_dump($find);
+            //var_dump($find);
             if(!empty($find) && count($find) > 0){
                 session_unset();
                 session_regenerate_id();
@@ -141,13 +141,22 @@ class User extends MY_Controller
              //   unset($config);
             }
             $img_path = $config['new_image'];
-            $data = array(
-                'address' => $address,
-                'phone' => $phone,
-                'avatar' => $img_path
-            );
+            if ($img_path == null){
+                $data = array(
+                    'address' => $address,
+                    'phone' => $phone
+                );
+            }else{
+                $data = array(
+                    'address' => $address,
+                    'phone' => $phone,
+                    'avatar' => $img_path
+                );
+            }
+
             $edit = $this->User_model->update_user($id,$data);
             if ($edit) {
+                $this->session->set_userdata('useravatar', $data['avatar']);
                 redirect(site_url('user/profile/'.$id));
             } else {
                 echo "not ok";

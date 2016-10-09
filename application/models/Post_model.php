@@ -28,6 +28,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->order_by('post.time','DESC');
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
