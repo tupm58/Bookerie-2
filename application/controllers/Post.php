@@ -39,7 +39,6 @@ class Post extends MY_Controller
         
         $user_id = $this->_session_uid();
         $this->User_model->find_user_by_id($user_id);
-     //   $this->Comment_model->load_comment();
         $data = array();
         $data['post'] = $this->Post_model->load_all_posts();
         

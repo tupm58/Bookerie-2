@@ -116,11 +116,45 @@ class User extends MY_Controller
         $data['user'] = $this->User_model->find_user_by_id($user_id);
         $this->load->view('user/profile_view',$data);
     }
-    function update($id)
+    function update()
     {
         $id = $this->_session_uid();
+        if ($this->input->post('editProfile'))
+        {
+            $address = $this->input->post('address');
+            $address = $this->security->xss_clean($address);
 
+            $phone = $this->input->post('phone');
+            $phone = $this->security->xss_clean($phone);
+            //up anh
+            $config['upload_path'] = './uploads/images/avatar';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('userfile')) {
+                $error = $this->upload->display_errors();
+            } else {
+                $check = $this->upload->data();
+                $this->load->library("image_lib");
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = 'uploads/images/avatar/' . $check['file_name'];
+            }
+            $img_path = $config['source_image'];
+            $data = array(
+                'address' => $address,
+                'phone' => $phone,
+                'avatar' => $img_path
+            );
+            $edit = $this->User_model->update_user($id,$data);
+            if ($edit) {
+                redirect(site_url('user/profile'));
+            } else {
+                echo "not ok";
+            }
+        }
     }
+
+
+
     function get_user($id =0)
     {
         $this->_check_login();

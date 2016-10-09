@@ -22,7 +22,8 @@ class User_model extends CI_Model
         return $check_flag;
     }
 
-    function find_user($username,$password){
+    function find_user($username,$password)
+    {
         $data = array();
         $this->db->select('*');
         $this->db->where('username',$username);
@@ -33,7 +34,8 @@ class User_model extends CI_Model
         return $data;
     }
 
-    function find_user_by_id($id){
+    function find_user_by_id($id)
+    {
         $data = array();
         $this->db->select('*');
         $this->db->where('user_id',$id);
@@ -42,6 +44,12 @@ class User_model extends CI_Model
         $data = $query->row_array();
         return $data;
     }
-    
+    function update_user($id,$data)
+    {
+        $flag = FALSE;
+        $this->db->where('user_id',$id);
+        $flag = $this->db->update('user',$data);
+        return $flag;
+    }
     
 }

@@ -26,11 +26,15 @@
             $.material.init();
         });
     </script>
-
+    <style>
+        body{
+            background-color: #2c3e50;
+        }
+    </style>
 <body>
 
 <!-- Navigation -->
-<div class="navbar navbar-warning navbar-fixed-top" style="margin-bottom: 0;background-color: #0a2123">
+<div class="navbar navbar-warning navbar-fixed-top" style="margin-bottom: 0;background-color: #2C3E50">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
@@ -117,7 +121,7 @@
         <div class="main" id="about">
             <section  style="background-color:white">
                 <div class="row">
-                    <h2 style="text-align: center;padding-top: 100px">About</h2>
+                    <h2 style="text-align: center;padding-top: 100px; color: #2c3e50"><b>About</b></h2>
                 </div>
                 <hr>
                 <br>
@@ -131,10 +135,10 @@
     </div>
     <div class="row">
         <div class="main" id="login">
-            <section  style="background-color:#0097A7;padding-top: 150px">
+            <section  style="background-color:#18BC9C;padding-top: 150px">
                 <div class="row">
                     <div  class="col-md-offset-2 col-md-3" style="margin-top: 0px">
-                        <h2 style="color: white">Login</h2>
+                        <h1 style="color: white"><b>Login</b></h1>
                         <br>
                         <h4  style="color: white" >Sign in to have full power to explore the book world</h4>
                     </div>
@@ -157,7 +161,7 @@
                                     <div class="form-group">
                                         <div >
                                             <button type="submit" class="btn btn-raised btn-warning"
-                                                    name="btnLogin" id="btnLogin"
+                                                    name="btnLogin" id="btnLogin" style="background-color: #18bc9c;"
                                             >Login</button>
                                         </div>
                                     </div>
@@ -173,12 +177,12 @@
     </div>
 <div class="row">
     <div class="main" id="register">
-        <section  style="background-color:#FF9800;padding-top: 100px">
+        <section  style="background-color:white;padding-top: 100px">
             <div class="row">
                 <div  class="col-md-offset-2 col-md-3" style="margin-top: 0px">
-                    <h2 style="color: white">Register</h2>
+                    <h1 style="color: #2c3e50"><b>Register</b></h1>
                     <br>
-                    <h4  style="color: white" >Create an account to sell book!!</h4>
+                    <h4  style="color: #2c3e50" ><b>Create an account to sell book!!</b></h4>
                 </div>
                 <div class="col-md-1">
 
@@ -206,7 +210,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div >
-                                        <button type="submit" class="btn btn-raised btn-warning" name="btnRegister" id="btnRegister">Sign Up</button>
+                                        <button type="submit" class="btn btn-raised btn-warning" name="btnRegister" id="btnRegister" style="background-color: #18bc9c;">Sign Up</button>
                                     </div>
                                 </div>
 
@@ -221,9 +225,9 @@
     <hr>
 
     <!-- Footer -->
-    <footer>
+    <footer >
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="color: white;">
                 <p>Copyright &copy; Liucuxiu 2016</p>
             </div>
         </div>

@@ -1,4 +1,25 @@
-<?php if (!defined('BASEPATH')){exit('No direct script access allowed');} ?>
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+} ?>
+<style>
+    .close1 {
+        position: absolute;
+        top: -8px;
+        right: -2px;
+        z-index: 200;
+        /*background-color: #FFF;*/
+        padding: 4px 1px 1px;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        /*opacity: .2;*/
+        text-align: center;
+        font-size: 20px;
+        line-height: 10px;
+        /*border-radius: 50%;*/
+    }
+
+</style>
 <br>
 <br>
 
@@ -7,85 +28,113 @@
 
 <br>
 
-    <div>
+<div>
 
-        <?php foreach($post as $p): ?>
-            <br>
-            <div class="row">
-                <img class="col-md-1 col-md-offset-3"  src="<?php echo base_url()."uploads/images/avatar/default.png"; ?>" alt="Loading image...">
-<!--                                <div class="col-md-1 col-md-offset-2">--><?php //echo $p['username']; ?><!--</div>-->
-                <div class="col-md-6 ">
-                    <div class="card" id="card-post">
-                        <!--                        <div class="card-height-indicator" ></div>-->
-                        <div class="card-content" style="position: inherit !important; min-height: 100%">
-                            <a href="<?php echo base_url('/post/post_detail/').$p['post_id']; ?>">
-                            <div class="card-image">
+    <?php foreach ($post as $p): ?>
+        <br>
+        <div class="row">
+            <img class="col-md-1 col-md-offset-3" src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"
+                 alt="Loading image...">
+            <!--                                <div class="col-md-1 col-md-offset-2">-->
+            <?php //echo $p['username']; ?><!--</div>-->
 
-                                <?php
-                                if ($p['image']){
-                                    ?>
-                                    <img src="<?php echo base_url().$p['image']; ?>" alt="Loading image...">
-                                    <?php
-                                }
+            <div class="col-md-6 ">
+                <div class="card" id="card-post">
+                    <!--                        <div class="card-height-indicator" ></div>-->
+                    <div class="card-content" style="position: inherit !important; min-height: 100%">
+                        <?php
+                        if ($p['user_id'] == $userid) {
+                            ?>
+                            <span class="close1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <span class="glyphicon glyphicon-inverse glyphicon-chevron-down"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="#">Edit</a></li>
+                                            <li><a href="<?php ?>">Delete</a></li>
+                                        </ul>
+                                    </div>
+
+                                </span>
+                        <?php } ?>
+                        <div class="card-image">
+                            <?php
+                            if ($p['image']) {
                                 ?>
-                                <h3 class="card-image-headline"><?php echo $p['name']?></h3>
-                            </div>
-                            </a>
-                            <div class="card-body"  >
-                                <h4><b><?php echo $p['name']?></b></h4>
-                                <p><?php echo $p['description']; ?></p>
-                                <p>Giá bán:<?php echo $p['sprice'];?></p>
-                                <p>Chất lượng: <?php echo $p['quality'];?> </p>
-                            </div>
-                            <footer class="card-footer">
-                                <div style="margin-left:15px">
-                                    <button class="btn btn-raised btn-xs">Share</button>
-                                    <button class="btn btn-raised btn-xs btn-warning" onclick="$(this).closest('.row').find('#'+<?php echo $p['post_id']?>).focus()">Comments</button>
-                                </div>
+                                <img src="<?php echo base_url() . $p['image']; ?>" alt="Loading image...">
+                                <?php
+                            }
+                            ?>
 
-                                <div class="actionBox">
-                                    <ul class="commentList">
+                            <h3 class="card-image-headline"><?php echo $p['name'] ?></h3>
+                        </div>
+
+                        <div class="card-body">
+                            <h4>
+                                <b><a href="<?php echo base_url('/post/post_detail/') . $p['post_id']; ?>"><?php echo $p['name'] ?></a></b>
+                            </h4>
+                            <p><?php echo $p['description']; ?></p>
+                            <p>Giá bán:<?php echo $p['sprice']; ?></p>
+                            <p>Chất lượng: <?php echo $p['quality']; ?> </p>
+                        </div>
+                        <footer class="card-footer">
+                            <div style="margin-left:15px">
+                                <button class="btn btn-raised btn-xs">Share</button>
+                                <button class="btn btn-raised btn-xs btn-warning"
+                                        style="background-color: #18BC9C"
+                                        onclick="$(this).closest('.row').find('#'+<?php echo $p['post_id'] ?>).focus()">
+                                    Comments
+                                </button>
+                            </div>
+
+                            <div class="actionBox">
+                                <ul class="commentList">
                                     <?php
-                                        foreach ($p['comments'] as $comment){
-                                    ?>
+                                    foreach ($p['comments'] as $comment) {
+                                        ?>
                                         <li>
                                             <div class="commenterImage">
-                                                <img src="<?php echo base_url()."uploads/images/avatar/default.png"; ?>" />
+                                                <img
+                                                    src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"/>
                                             </div>
-                                            <b><?php echo $comment['username'];?></b>
+                                            <b><?php echo $comment['username']; ?></b>
                                             <div class="commentText">
-                                                <p class=""><?php echo $comment['content'];?></p> <span class="date sub-text"><?php echo $comment['time'];?></span>
-
+                                                <p class=""><?php echo $comment['content']; ?></p>
+                                                <span class="date sub-text"><?php echo $comment['time']; ?></span>
                                             </div>
                                         </li>
                                     <?php }
                                     ?>
-                                    </ul>
-                                    <div class="row">
-                                        <div class="col-md-10 ">
-                                            <input class=" form-control is-empty message col-md-3 content " id="<?php echo $p['post_id']?>" type="text" placeholder="Your comments"
-                                                   name="content" >
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button style="bottom: 0px !important;" class=" myButton btn btn-raised btn-warning" id="<?php echo $p['post_id']?>">
-                                                Add</button>
-                                        </div>
+                                </ul>
+                                <div class="row">
+                                    <div class="col-md-10 ">
+                                        <input class=" form-control is-empty message col-md-3 content "
+                                               id="<?php echo $p['post_id'] ?>" type="text" placeholder="Your comments"
+                                               name="content">
                                     </div>
-
+                                    <div class="col-md-2">
+                                        <button class=" myButton btn btn-raised btn-warning"
+                                                id="<?php echo $p['post_id'] ?>"
+                                                style="bottom: 0px !important ;background-color: #18BC9C;">
+                                            Add
+                                        </button>
+                                    </div>
                                 </div>
 
-                            </footer>
-                        </div>
+                            </div>
+
+                        </footer>
                     </div>
                 </div>
-
             </div>
-            <br>
-        <?php endforeach; ?>
-    </div>
+
+        </div>
+        <br>
+    <?php endforeach; ?>
 </div>
-
-
+</div>
 
 
 <!-- Modal -->
@@ -131,7 +180,8 @@
                         <div class="form-group ">
                             <label for="inputName" class="col-md-2 control-label">Origin Price</label>
                             <div class="col-md-10">
-                                <input name="oprice" type="number" class="form-control" placeholder="Enter origin price">
+                                <input name="oprice" type="number" class="form-control"
+                                       placeholder="Enter origin price">
                             </div>
                         </div>
                         <div class="form-group ">
@@ -153,13 +203,15 @@
 
                             <div class="col-md-10">
                                 <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input name="userfile" id="userfile" type="file"  multiple="">
+                                <input name="userfile" id="userfile" type="file" multiple="">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-2">
-                                <button type="button" class="btn btn-default">Cancel</button>
-                                <input type="submit" id="createPost" name="createPost" value="Post" class="btn  btn-raised btn-warning">
+                                <input type="submit" id="createPost" name="createPost" value="Post"
+                                       class="btn  btn-raised btn-warning"
+                                       style="background-color: #18BC9C"
+                                >
                             </div>
                         </div>
                     </fieldset>
@@ -170,25 +222,22 @@
 </div>
 
 <script>
-    $('.modal').on('hidden.bs.modal', function(){
+    $('.modal').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
     });
     $(document).ready(function () {
-        $('.myButton').click(function(){
+        $('.myButton').click(function () {
             var check = true;
-//            var content = $(this).closest('input').find('#content').val();
-
-            check = (content != '') ? check :false;
-
+            check = (content != '') ? check : false;
             var post_id = $(this).attr('id');
-            var content = $.trim($('#'+post_id).val());
+            var content = $.trim($('#' + post_id).val());
 
-            alert("aaa"+post_id + content);
-            if (check){
+            alert("aaa" + post_id + content);
+            if (check) {
                 $.ajax({
                     url: '<?php echo site_url('comment/add_comment')?>',
-                    data:{
-                        "content" : content,
+                    data: {
+                        "content": content,
                         "post_id": post_id
                     },
                     type: 'POST',
@@ -196,7 +245,14 @@
                         alert("bat dau gui data");
                     },
                     success: function (data) {
-
+                        alert(content);
+                        $('.commentList').append(''<li> <div class="commenterImage">' +
+                        '<img src="<?php echo base_url().'uploads/images/avatar/default.png'; ?>" /> ' +
+                        '</div>' +
+                        "<b>" + + "</b> " +
+                        "<div class="commentText"> " +
+                        "<p>"+ content + "</p>"+
+                            "</div> </li>");
                     }
                 });
             }

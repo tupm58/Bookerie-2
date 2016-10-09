@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-warning  navbar-fixed-top" style="margin-bottom: 0;background-color: #0a2123">
+<div class="navbar navbar-warning  navbar-fixed-top" style="margin-bottom: 0;background-color: #2C3E50">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">

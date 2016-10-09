@@ -1,5 +1,5 @@
 body{
-
+    /*background-color: white;*/
 }
 #card-post{
     /*-webkit-box-shadow: none;*/
@@ -168,3 +168,6 @@ textarea{
 .form-group {
     margin: 0 0 0 0;
 }
+/*.btn .btn-warning {*/
+    /*background-color: #18bc9c !important;*/
+/*}*/

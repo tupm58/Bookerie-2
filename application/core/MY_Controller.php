@@ -25,7 +25,7 @@ class MY_Controller extends CI_Controller
         $header['meta'] = isset($data['meta']) ? $data['meta'] : "";
         $header['module'] = $this->_module;
         $header['username'] = $this->_session_uname();
-
+        $header['userid'] = $this->_session_uid();
         $this->load->view('header_view',$header);
     }
     protected function _load_left()
