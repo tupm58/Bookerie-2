@@ -25,7 +25,7 @@ class Comment_model extends CI_Model
 
     function load_comment($post_id)
     {
-        $this->db->select('content , comment.time,comment.user_id , username');
+        $this->db->select('content , comment.time,comment.user_id , username, avatar');
         $this->db->from('comment');
         $this->db->where('comment.post_id',$post_id);
         $this->db->join('user','comment.user_id = user.user_id');

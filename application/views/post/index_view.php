@@ -18,6 +18,11 @@
         line-height: 10px;
         /*border-radius: 50%;*/
     }
+    .avatar {
+        border-radius: 50%;
+        width:50px;
+        height: 50px;
+    }
 
 </style>
 <br>
@@ -33,8 +38,24 @@
     <?php foreach ($post as $p): ?>
         <br>
         <div class="row">
-            <img class="col-md-1 col-md-offset-3" src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"
-                 alt="Loading image...">
+            <?php
+                if ($p['avatar'] ==''){
+                    ?>
+                    <img class="col-md-1 col-md-offset-3 img-circle"  src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"
+                         alt="Loading image...">
+            <?php
+                }else{
+            ?>
+                    <div>
+                        <img class="col-md-1 col-md-offset-3 img-circle" style="height:66px" src="<?php echo base_url().$p['avatar']; ?>"
+                             alt="Loading image...">
+                    </div>
+
+            <?php
+                }
+            ?>
+
+
             <!--                                <div class="col-md-1 col-md-offset-2">-->
             <?php //echo $p['username']; ?><!--</div>-->
 
@@ -96,8 +117,18 @@
                                         ?>
                                         <li>
                                             <div class="commenterImage">
-                                                <img
-                                                    src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"/>
+                                                <?php if($comment['avatar']==''){
+                                                ?>
+                                                    <img src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"/>
+
+                                                    <?php
+                                                }else{
+                                                    ?>
+                                                    <img src="<?php echo base_url() .$comment['avatar']; ?>" style="height:32px"/>
+
+                                                    <?php
+                                                }
+                                                ?>
                                             </div>
                                             <b><?php echo $comment['username']; ?></b>
                                             <div class="commentText">
@@ -208,6 +239,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-2">
+                                <input type="submit" id="createPost" name="createPost" value="Post"
                                 <input type="submit" id="createPost" name="createPost" value="Post"
                                        class="btn  btn-raised btn-warning"
                                        style="background-color: #18BC9C"

@@ -104,18 +104,7 @@ class User extends MY_Controller
         $this->session->sess_destroy();
         redirect(site_url('user'));
     }
-
-    function profile()
-    {
-        $this->_check_login();
-        $header = array();
-        $header['title'] = "Profile";
-        $this->_load_header($header);
-        $user_id = $this->_session_uid();
-        $data = array();
-        $data['user'] = $this->User_model->find_user_by_id($user_id);
-        $this->load->view('user/profile_view',$data);
-    }
+    
     function update()
     {
         $id = $this->_session_uid();
@@ -137,8 +126,19 @@ class User extends MY_Controller
                 $this->load->library("image_lib");
                 $config['image_library'] = 'gd2';
                 $config['source_image'] = 'uploads/images/avatar/' . $check['file_name'];
+                $config['new_image'] = 'uploads/images/avatar/thumb/'.$check['raw_name'].$check['file_ext'];
+                //$config['create_thumb'] = TRUE;
+               // $config['maintain_ratio'] = TRUE;
+                $config['width'] = 128;
+                $config['height'] = 128;
+                $config['x_axis'] = 128;
+                $config['y_axis'] = 128;
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+               // $this->image_lib->clear();
+             //   unset($config);
             }
-            $img_path = $config['source_image'];
+            $img_path = $config['new_image'];
             $data = array(
                 'address' => $address,
                 'phone' => $phone,
@@ -146,7 +146,7 @@ class User extends MY_Controller
             );
             $edit = $this->User_model->update_user($id,$data);
             if ($edit) {
-                redirect(site_url('user/profile'));
+                redirect(site_url('user/profile/'.$id));
             } else {
                 echo "not ok";
             }
@@ -155,7 +155,7 @@ class User extends MY_Controller
 
 
 
-    function get_user($id =0)
+    function profile($id =0)
     {
         $this->_check_login();
         $header = array();
@@ -163,11 +163,8 @@ class User extends MY_Controller
         $this->_load_header($header);
         $data = array();
         $data['user'] = $this->User_model->find_user_by_id($id);
-        if ($id == $this->_session_uid()){
-            $this->load->view('user/profile_view',$data);
-        }else{
-            $this->load->view('user/other_profile_view',$data);
-        }
+
+        $this->load->view('user/profile_view',$data);
 
     }
   

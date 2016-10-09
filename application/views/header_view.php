@@ -58,7 +58,7 @@
 
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo site_url('user/profile'); ?>">Settings</a></li>
+                        <li><a href="<?php echo site_url('user/profile/') . $userid; ?>">Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo site_url('user/logout'); ?>">Log out</a></li>
                     </ul>

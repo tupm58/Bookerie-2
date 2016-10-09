@@ -180,11 +180,18 @@
                                 <i class="glyphicon glyphicon-earphone"></i>
                                 <?php echo $user['phone']?> </a>
                         </li>
-                        <li>
-                            <a  href="#" data-toggle="modal" data-target="#editProfile">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Account Settings </a>
-                        </li>
+                        <?php
+                            if ($user['user_id'] == $userid){
+                        ?>
+                                <li>
+                                    <a  href="#" data-toggle="modal" data-target="#editProfile">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Account Settings </a>
+                                </li>
+                        <?php
+                            }
+                        ?>
+
                     </ul>
                 </div>
                 <!-- END MENU -->
