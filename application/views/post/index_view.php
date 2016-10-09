@@ -73,8 +73,12 @@
                                             <span class="glyphicon glyphicon-inverse glyphicon-chevron-down"></span>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#">Edit</a></li>
-                                            <li><a href="<?php ?>">Delete</a></li>
+                                            <li><a href="#">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                    Edit</a></li>
+                                            <li><a href="<?php ?>" id="deleteButton">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                    Delete</a></li>
                                         </ul>
                                     </div>
 
@@ -102,7 +106,15 @@
                         </div>
                         <footer class="card-footer">
                             <div style="margin-left:15px">
-                                <button class="btn btn-raised btn-xs">Share</button>
+<!--                                <button class="btn btn-raised btn-xs">Share</button>-->
+                                <div class="fb-share-button"
+                                     data-href="http://localhost/bookerie-2/index.php/post/<?php echo  $p['post_id']; ?>"
+                                     data-layout="button_count" data-size="small"
+                                     data-mobile-iframe="true">
+                                    <a class="fb-xfbml-parse-ignore"
+                                       target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fbookerie-2%2Findex.php%2Fpost%2F<?php echo  $p['post_id']; ?>&amp;src=sdkpreparse">
+                                        Share</a>
+                                </div>
                                 <button class="btn btn-raised btn-xs btn-warning"
                                         style="background-color: #18BC9C"
                                         onclick="$(this).closest('.row').find('#'+<?php echo $p['post_id'] ?>).focus()">
@@ -111,7 +123,7 @@
                             </div>
 
                             <div class="actionBox">
-                                <ul class="commentList">
+                                <ul class="commentList" id="commentList<?php echo $p['post_id'];?>">
                                     <?php
                                     foreach ($p['comments'] as $comment) {
                                         ?>
@@ -124,7 +136,7 @@
                                                     <?php
                                                 }else{
                                                     ?>
-                                                    <img src="<?php echo base_url() .$comment['avatar']; ?>" style="height:32px"/>
+                                                    <img src="<?php echo base_url() .$comment['avatar']; ?>" style="height:30px"/>
 
                                                     <?php
                                                 }
@@ -168,7 +180,7 @@
 </div>
 
 
-<!-- Modal -->
+<!--  ADD Modal -->
 <div class="modal fade" id="createNewPost" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -259,6 +271,7 @@
     });
     $(document).ready(function () {
         $('.myButton').click(function () {
+
             var check = true;
             check = (content != '') ? check : false;
             var post_id = $(this).attr('id');
@@ -278,17 +291,21 @@
                     },
                     success: function (data) {
                         alert(content);
-                        $('.commentList').append(''<li> <div class="commenterImage">' +
-                        '<img src="<?php echo base_url().'uploads/images/avatar/default.png'; ?>" /> ' +
+                        $('#commentList'+post_id).append('<li> <div class="commenterImage">' +
+                        '<img src="<?php echo base_url().$useravatar; ?>" /> ' +
                         '</div>' +
-                        "<b>" + + "</b> " +
-                        "<div class="commentText"> " +
+                        "<b>" + "<?php echo $username; ?>" + "</b> " +
+                        "<div class='commentText'> " +
                         "<p>"+ content + "</p>"+
                             "</div> </li>");
+                        $('#commentList'+post_id).scrollTop($('#commentList'+post_id)[0].scrollHeight);
+                        $('#' + post_id).val('');
+
                     }
                 });
             }
         });
     });
+
 </script>
 

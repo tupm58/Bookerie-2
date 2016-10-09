@@ -85,12 +85,14 @@ class User extends MY_Controller
                 'password' => $password
             );
             $find = $this->User_model->find_user($username,$password);
+            var_dump($find);
             if(!empty($find) && count($find) > 0){
                 session_unset();
                 session_regenerate_id();
                 $this->session->set_userdata('userid',$find['user_id']);
                 $this->session->set_userdata('username',$find['username']);
                 $this->session->set_userdata('useremail',$find['email']);
+                $this->session->set_userdata('useravatar',$find['avatar']);
                 $this->session->set_userdata('userrole',$find['level']);
                 redirect(site_url('post'));
             }else{
@@ -104,7 +106,7 @@ class User extends MY_Controller
         $this->session->sess_destroy();
         redirect(site_url('user'));
     }
-    
+
     function update()
     {
         $id = $this->_session_uid();

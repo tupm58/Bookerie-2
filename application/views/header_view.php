@@ -26,7 +26,15 @@
     </script>
 </head>
 <body>
-
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=850222938441779";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <div class="navbar navbar-warning  navbar-fixed-top" style="margin-bottom: 0;background-color: #2C3E50">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -51,8 +59,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
 
-                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0">
-                        <!--                        <img src="--><?php //echo base_url()."uploads/images/avatar/default.png"; ?><!--" style="margin:0;width: 30px;height: 30px;" class="avatar">-->
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top:10px;padding-bottom:10px;">
+                        <img src="<?php echo base_url().$useravatar; ?>" class="img-circle" width="41px";height="41px" style="margin-right: 8px">
                         <?php echo $username; ?>
                         <b class="caret"></b>
 
