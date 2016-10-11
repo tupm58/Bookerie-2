@@ -156,7 +156,9 @@ class User extends MY_Controller
 
             $edit = $this->User_model->update_user($id,$data);
             if ($edit) {
-                $this->session->set_userdata('useravatar', $data['avatar']);
+                if ($data['avatar'] !=null){
+                    $this->session->set_userdata('useravatar', $data['avatar']);
+                }
                 redirect(site_url('user/profile/'.$id));
             } else {
                 echo "not ok";

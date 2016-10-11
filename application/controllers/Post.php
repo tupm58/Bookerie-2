@@ -103,8 +103,12 @@ class Post extends MY_Controller
     
     function post_detail($post_id)
     {
-        $data = $this->Post_model->get_post_detail($post_id);
-        var_dump($data);
+        $header = array();
+        $header['title'] = "Post";
+        $this->_load_header($header);
+        $this->_load_left();
+        $data['p'] = $this->Post_model->get_post_detail($post_id);
+        //var_dump($data);
         $this->load->view("post/post_detail_view.php",$data);// load view
     }
     
@@ -115,10 +119,67 @@ class Post extends MY_Controller
     
     function delete($post_id)
     {
-        
         $delete = $this->Post_model->delete_post($post_id);
         if ($delete){
             redirect(site_url('post/index'));
         }
+    }
+
+//    order by
+    function post_order_by_name()
+    {
+        $header = array();
+        $header['title'] = "Post";
+        $this->_load_header($header);
+        $this->_load_left();
+        $data = array();
+        $data['post'] = $this->Post_model->post_order_by_name();
+
+        $this->load->view("post/index_view.php",$data);// load view
+    }
+    function post_order_by_name_desc()
+    {
+        $header = array();
+        $header['title'] = "Post";
+        $this->_load_header($header);
+        $this->_load_left();
+        $data = array();
+        $data['post'] = $this->Post_model->post_order_by_name_desc();
+
+        $this->load->view("post/index_view.php",$data);// load view
+    }
+    function post_order_by_price()
+    {
+        $header = array();
+        $header['title'] = "Post";
+        $this->_load_header($header);
+        $this->_load_left();
+        $data = array();
+        $data['post'] = $this->Post_model->post_order_by_price();
+
+        $this->load->view("post/index_view.php",$data);// load view
+    }
+    function post_order_by_price_desc()
+    {
+        $header = array();
+        $header['title'] = "Post";
+        $this->_load_header($header);
+        $this->_load_left();
+        $data = array();
+        $data['post'] = $this->Post_model->post_order_by_price_desc();
+
+        $this->load->view("post/index_view.php",$data);// load view
+    }
+    function search()
+    {
+        $name = $this->input->get('search');
+        $name = $this->security->xss_clean($name);
+        $header = array();
+        $header['title'] = "Post";
+        $this->_load_header($header);
+        $this->_load_left();
+        $data = array();
+        $data['post'] = $this->Post_model->search($name);
+        $this->load->view("post/index_view.php",$data);// load view
     }
 }

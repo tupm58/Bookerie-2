@@ -76,7 +76,10 @@
                                             <li><a href="#">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                     Edit</a></li>
-                                            <li><a href="<?php ?>" id="deleteButton">
+                                            <li><a href="#deleteModal"
+                                                   data-id="<?php echo $p['post_id'];?>"
+                                                   data-toggle="modal"
+                                                   class="deleteButton">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                     Delete</a></li>
                                         </ul>
@@ -107,14 +110,6 @@
                         <footer class="card-footer">
                             <div style="margin-left:15px">
                                 <button class="btn btn-raised btn-xs">Share</button>
-<!--                                <div class="fb-share-button"-->
-<!--                                     data-href="http://localhost/bookerie-2/index.php/post/--><?php //echo  $p['post_id']; ?><!--"-->
-<!--                                     data-layout="button_count" data-size="small"-->
-<!--                                     data-mobile-iframe="true">-->
-<!--                                    <a class="fb-xfbml-parse-ignore"-->
-<!--                                       target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fbookerie-2%2Findex.php%2Fpost%2F--><?php //echo  $p['post_id']; ?><!--&amp;src=sdkpreparse">-->
-<!--                                        Share</a>-->
-<!--                                </div>-->
                                 <button class="btn btn-raised btn-xs btn-warning"
                                         style="background-color: #18BC9C"
                                         onclick="$(this).closest('.row').find('#'+<?php echo $p['post_id'] ?>).focus()">
@@ -264,9 +259,27 @@
         </div>
     </div>
 </div>
-
+<!-- DELETE Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #18bc9c;padding: 11px;" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="color:white;">Delete post</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this post ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="deleteConfirm" >Delete</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- EDIT Modal -->
 <script>
-    $('.modal').on('hidden.bs.modal', function () {
+    $('#createNewPost').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
     });
     $(document).ready(function () {
@@ -292,11 +305,11 @@
                     success: function (data) {
                         alert(content);
                         $('#commentList'+post_id).append('<li> <div class="commenterImage">' +
-                        '<img src="<?php echo base_url().$useravatar; ?>"  style="height:30px"/> ' +
-                        '</div>' +
-                        "<b>" + "<?php echo $username; ?>" + "</b> " +
-                        "<div class='commentText'> " +
-                        "<p>"+ content + "</p>"+
+                            '<img src="<?php echo base_url().$useravatar; ?>"  style="height:30px"/> ' +
+                            '</div>' +
+                            "<b>" + "<?php echo $username; ?>" + "</b> " +
+                            "<div class='commentText'> " +
+                            "<p>"+ content + "</p>"+
                             "</div> </li>");
                         $('#commentList'+post_id).scrollTop($('#commentList'+post_id)[0].scrollHeight);
                         $('#' + post_id).val('');
@@ -304,6 +317,24 @@
                     }
                 });
             }
+        });
+        $('.deleteButton').click(function(){
+            var postId = $(this).data('id');
+            console.log(postId);
+//            $(".modal-body #bookId").val(postId);
+            $('#deleteConfirm').click(function(){
+                $.ajax({
+                    url: '<?php echo site_url('post/delete/')?>'+postId,
+                    type: 'DELETE',
+                    beforeSend: function () {
+                        alert("bat dau gui data");
+                    },
+                    success: function (data) {
+                        alert("success");
+                        location.reload();
+                    }
+                });
+            })
         });
     });
 

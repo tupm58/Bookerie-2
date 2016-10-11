@@ -26,15 +26,14 @@
     </script>
 </head>
 <body>
-<div id="fb-root"></div>
+
 <script>
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=850222938441779";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    $('#searchForm input').keydown(function(e) {
+        if (e.keyCode == 13) {
+            $('#searchForm').submit();
+        }
+    });
+</script>
 <div class="navbar navbar-warning  navbar-fixed-top" style="margin-bottom: 0;background-color: #2C3E50">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -48,12 +47,12 @@
         <div class="navbar-collapse collapse navbar-warning-collapse">
             <ul class="nav navbar-nav">
                 <li class="<?php echo ($module === 'home') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">Home</a></li>
-                <li class="<?php echo ($module === 'baivietcuatoi') ? 'active' : ''; ?>"><a href="<?php echo site_url('post/my_post'); ?>">My Posts</a></li>
+                <li class="<?php echo ($module === 'baivietcuatoi') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">My Posts</a></li>
 
             </ul>
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" id="searchForm" action=" <?php echo site_url('post/search'); ?>">
                 <div class="form-group">
-                    <input type="text" class="form-control col-md-8" placeholder="Search">
+                    <input type="text" class="form-control col-md-8" id="search" name="search" placeholder="Search">
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
