@@ -117,10 +117,13 @@ class Post_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->join('user','user.user_id = post.user_id');
-        $this->db->like('post.name', $name);
-        $this->db->or_like('post.description', $name);
-        $this->db->from('post');
+        $parts = explode(" ",$name);
+        foreach ($parts as $q){
+            $this->db->or_like('post.name', $q);
+            $this->db->or_like('post.description', $q);
+        }
 
+        $this->db->from('post');
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
