@@ -166,8 +166,6 @@ class User extends MY_Controller
         }
     }
 
-
-
     function profile($id =0)
     {
         $this->_check_login();

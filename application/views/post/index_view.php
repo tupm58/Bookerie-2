@@ -38,6 +38,7 @@
     <?php foreach ($post as $p): ?>
         <br>
         <div class="row">
+            <input id="userId<?php echo $p['post_id'];?>" class="userId" style="display:none;" value="<?php echo $p['user_id'];?>">
             <?php
                 if ($p['avatar'] ==''){
                     ?>
@@ -279,6 +280,15 @@
 </div><!-- /.modal -->
 <!-- EDIT Modal -->
 <script>
+    var userId = <?php echo $userid ; ?> ;
+    console.log(userId);
+    
+    var socket = io.connect( 'http://localhost:8080' );
+    socket.on('connect',function(data){
+       socket.emit('storeClientIfo', {customId:  userId})
+     //  socket.emit('adduser');
+    });
+
     $('#createNewPost').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
     });
@@ -289,9 +299,12 @@
             check = (content != '') ? check : false;
             var post_id = $(this).attr('id');
             var content = $.trim($('#' + post_id).val());
+            var userId =  $.trim($('#userId' + post_id).val());
+            console.log(userId);
 
             alert("aaa" + post_id + content);
             if (check) {
+                socket.emit( 'message', {userId: userId, name: post_id, message: content });
                 $.ajax({
                     url: '<?php echo site_url('comment/add_comment')?>',
                     data: {
@@ -303,7 +316,7 @@
                         alert("bat dau gui data");
                     },
                     success: function (data) {
-                        alert(content);
+                        //alert(content);
                         $('#commentList'+post_id).append('<li> <div class="commenterImage">' +
                             '<img src="<?php echo base_url().$useravatar; ?>"  style="height:30px"/> ' +
                             '</div>' +
@@ -317,6 +330,9 @@
                     }
                 });
             }
+        });
+        socket.on('message', function( data ) {
+            console.log(data);
         });
         $('.deleteButton').click(function(){
             var postId = $(this).data('id');

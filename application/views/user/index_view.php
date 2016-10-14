@@ -31,7 +31,7 @@
             background-color: #2c3e50;
         }
     </style>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 
 <!-- Navigation -->
 <div class="navbar navbar-warning navbar-fixed-top" style="margin-bottom: 0;background-color: #2C3E50">
@@ -47,8 +47,8 @@
         <div class="navbar-collapse collapse navbar-warning-collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="#about">About</a></li>
-                <li class=""><a href="#register">I am new one</a></li>
                 <li class=""><a href="#login">Let me log in</a></li>
+                <li class=""><a href="#register">I am new one</a></li>
                 <li class=""><a href="<?php echo site_url('post'); ?>">Enroll now!!</a></li>
             </ul>
         </div>

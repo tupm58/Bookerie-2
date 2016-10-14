@@ -16,8 +16,10 @@
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js" ></script>
     <script src="<?php echo base_url(); ?>js/material.min.js" ></script>
     <script src="<?php echo base_url(); ?>js/ripples.min.js" ></script>
-    <script src="<?php echo base_url(); ?>js/fish/custom.js" ></script>
+<!--    <script src="--><?php //echo base_url(); ?><!--js/fish/custom.js" ></script>-->
 
+    <script src="<?php echo base_url(); ?>nodejs/node_modules/socket.io-client/socket.io.js"></script>
+<!--    <script src="js/nodeClient.js"></script>-->
 
     <script>
         $(document).ready(function() {

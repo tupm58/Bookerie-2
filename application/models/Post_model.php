@@ -132,4 +132,14 @@ class Post_model extends CI_Model
         }
         return $data;
     }
+
+    function post_by_user($user_id)
+    {
+        $this->db->select('*');
+        $this->db->from('post');
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
+    }
 }

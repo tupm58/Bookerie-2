@@ -182,4 +182,9 @@ class Post extends MY_Controller
         $data['post'] = $this->Post_model->search($name);
         $this->load->view("post/index_view.php",$data);// load view
     }
+    
+    function post_by_user($user_id)
+    {
+        
+    }
 }
