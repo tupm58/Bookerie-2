@@ -102,7 +102,7 @@
                         </h4>
                         <p><?php echo $p['description']; ?></p>
                         <p>Giá bán:<?php echo $p['sprice']; ?></p>
-                        <p>Chất lượng: <?php echo $p['quality']; ?> </p>
+                        <p>Chất lượng: <?php echo $p['content']; ?> </p>
                     </div>
                     <footer class="card-footer">
                         <div style="margin-left:15px">

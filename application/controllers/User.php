@@ -138,8 +138,6 @@ class User extends MY_Controller
                 $config['y_axis'] = 128;
                 $this->image_lib->initialize($config);
                 $this->image_lib->resize();
-               // $this->image_lib->clear();
-             //   unset($config);
             }
             $img_path = $config['new_image'];
             if ($img_path == null){

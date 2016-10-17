@@ -80,7 +80,7 @@
                                             <span class="glyphicon glyphicon-inverse glyphicon-chevron-down"></span>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#">
+                                            <li><a href="<?php  echo base_url('/post/update/') . $p['post_id'];  ?>">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                     Edit</a></li>
                                             <li><a href="#deleteModal"
@@ -112,7 +112,7 @@
                             </h4>
                             <p><?php echo $p['description']; ?></p>
                             <p>Giá bán:<?php echo $p['sprice']; ?></p>
-                            <p>Chất lượng: <?php echo $p['quality']; ?> </p>
+                            <p>Chất lượng: <?php echo $p['content']; ?> </p>
                         </div>
                         <footer class="card-footer">
                             <div style="margin-left:15px">

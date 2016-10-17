@@ -27,6 +27,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.time','DESC');
         $query = $this->db->get();
         $data = $query->result_array();
@@ -41,12 +42,21 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->where('post_id',$post_id);
         $query = $this->db->get();
         $data = $query->row_array();
         $comments = $this->Comment_model->load_comment($post_id);
         $data['comments'] = $comments;
+      //  var_dump($data);
         return $data;
+    }
+    function update_post($post_id,$data)
+    {
+        $flag = FALSE;
+        $this->db->where('post_id',$post_id);
+        $flag = $this->db->update('post',$data);
+        return $flag;
     }
     function delete_post($post_id)
     {
