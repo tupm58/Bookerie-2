@@ -115,7 +115,10 @@
 
     /* Profile Content */
     .profile-content {
-        padding: 20px;
+        /*padding: 20px;*/
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 66px;
         background: #fff;
         min-height: 460px;
     }
@@ -200,40 +203,34 @@
         <div class="col-md-9">
             <div class="profile-content">
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3"  style="background-color: red">
-                        <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-block">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3" style="background-color: yellow">
-                        <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-block">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3" style="background-color: violet">
-                        <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-block">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php if (isset($post)){
+                        foreach ($post as $p){
+                            ?>
 
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3"  style="margin-bottom: 30px;">
+                        <div class="card">
+                            <?php if($p['image']){?>
+                                <img class="card-img-top" src="<?php echo base_url() . $p['image']; ?>" style="width: 167px;height:167px;" alt="Card image cap">
+
+                                <?php
+
+                            }?>
+                            <div class="card-block" >
+                                <h4 class="card-title" style="padding: 10px;margin-bottom:0;color:#18BC9C">
+                                    <a href="<?php echo base_url('/post/post_detail/') . $p['post_id']; ?>">
+                                        <b><?php echo $p['name'];?></b>
+                                    </a>
+
+                                </h4>
+                                <hr style="margin: 0;">
+                                <p style="padding: 10px" class="card-text">Price: <?php echo $p['sprice'];?></p>
+                            </div>
+                        </div>
+                    </div>
+                            <?php
+                        }
+                    }?>
                 </div>
             </div>
         </div>

@@ -7,28 +7,6 @@ var server = http.createServer( app );
 
 var io = socket.listen( server );
 
-// io.sockets.on( 'connection', function( client ) {
-//     console.log( "New client !" );
-//
-//     client.on( 'message', function( data ) {
-//         console.log( 'Message received ' + data.name + ":" + data.message );
-//        
-//         io.sockets.emit( 'message', { name: data.name, message: data.message } );
-//     });
-// });
-// io.sockets.on( 'connection', function( client ) {
-//     console.log( "New client !" );
-//     client.on('message',function (data) {
-//
-//         console.log(data.userId);
-//         var userId = client.handshake.data.userId;
-//        // console.log(userId);
-//         client.join('user'+ data.userId);
-//         console.log('user'+data.userId);
-//         console.log( 'Message received ' + data.name + ":" + data.message );
-//         io.to('user'+ data.userId).emit('message','hello');
-//     });
-// });
 var clients =[];
 
 io.sockets.on( 'connection', function( client ) {
@@ -43,10 +21,19 @@ io.sockets.on( 'connection', function( client ) {
         console.log(io.clients().sockets);
     });
     client.on('message',function (data) {
-
+        console.log(data.userId);
         for (var temp in io.clients().sockets){
             if (io.clients().sockets[temp].userId == data.userId){
-                io.clients().sockets[temp].emit( 'message', { name: data.name, message: data.message });
+                if (io.clients().sockets[temp].userId != client.userId){
+                    io.clients().sockets[temp].emit( 'message', {
+                            avatar : data.avatar,
+                            userId: data.userId,
+                            senderId : data.senderId ,
+                            senderName: data.senderName,
+                            post_id: data.post_id,
+                            message: data.message
+                        });
+                }
             }
         }
     });

@@ -271,6 +271,7 @@
 </div><!-- /.modal -->
 <!-- EDIT Modal -->
 <script>
+ 
     $('#createNewPost').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
     });
@@ -281,21 +282,27 @@
             check = (content != '') ? check : false;
             var post_id = $(this).attr('id');
             var content = $.trim($('#' + post_id).val());
-
-            alert("aaa" + post_id + content);
+            var userId =  $.trim($('#userId' + post_id).val());
+            var avatar =  '<?php echo base_url().$useravatar;?>';
+            console.log(avatar);
+            console.log("user"+userId);
             if (check) {
+                socket.emit( 'message', {
+                    avatar: avatar,
+                    userId: userId,
+                    senderId : senderId ,
+                    post_id: post_id,
+                    message: content
+                });
                 $.ajax({
                     url: '<?php echo site_url('comment/add_comment')?>',
                     data: {
                         "content": content,
-                        "post_id": post_id
+                        "post_id": post_id,
+                        "receiver_id": userId
                     },
                     type: 'POST',
-                    beforeSend: function () {
-                        alert("bat dau gui data");
-                    },
                     success: function (data) {
-                        alert(content);
                         $('#commentList'+post_id).append('<li> <div class="commenterImage">' +
                             '<img src="<?php echo base_url().$useravatar; ?>"  style="height:30px"/> ' +
                             '</div>' +
@@ -310,10 +317,10 @@
                 });
             }
         });
+
         $('.deleteButton').click(function(){
             var postId = $(this).data('id');
             console.log(postId);
-//            $(".modal-body #bookId").val(postId);
             $('#deleteConfirm').click(function(){
                 $.ajax({
                     url: '<?php echo site_url('post/delete/')?>'+postId,
@@ -329,5 +336,19 @@
             })
         });
     });
+    var yourstring = location.search.split("search=")[1];
+    //        var yourstring = "<?php //echo $_GET['search'] ; ?>//" ;
+    console.log(yourstring);
+    var words = yourstring.split("+");
+    console.log(words);
+    for (var i = 0 ; i < words.length ;i++){
+        $('p:contains('+words[i]+')', document.body).each(function(){
+            $(this).html($(this).html().replace(
+                new RegExp(words[i], 'g'), '<span class=someclass>'+words[i]+'</span>'
+            ));
+        });
+    }
+
 
 </script>
+

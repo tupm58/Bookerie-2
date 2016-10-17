@@ -14,6 +14,7 @@ class User extends MY_Controller
         $this->_module = trim(strtolower((__CLASS__)));
         parent::__construct();
         $this->load->model('User_model');
+        $this->load->model('Post_model');
         $this->load->helper(array('security'));
         $this->load->library('form_validation');
     }
@@ -174,7 +175,7 @@ class User extends MY_Controller
         $this->_load_header($header);
         $data = array();
         $data['user'] = $this->User_model->find_user_by_id($id);
-
+        $data['post'] = $this->Post_model->post_by_user($id);
         $this->load->view('user/profile_view',$data);
 
     }

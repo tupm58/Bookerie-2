@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
-
+        $this->load->model('Notification_model');
     }
     
     protected function _load_header()
@@ -27,6 +27,7 @@ class MY_Controller extends CI_Controller
         $header['username'] = $this->_session_uname();
         $header['userid'] = $this->_session_uid();
         $header['useravatar'] = $this->_session_uavatar();
+        $header['count_noti'] = $this->Notification_model->count_noti($this->_session_uid());
         $this->load->view('header_view',$header);
     }
     protected function _load_left()

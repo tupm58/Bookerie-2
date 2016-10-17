@@ -185,6 +185,6 @@ class Post extends MY_Controller
     
     function post_by_user($user_id)
     {
-        
+ 
     }
 }

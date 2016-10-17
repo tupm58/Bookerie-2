@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>skins/fish/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>skins/fish/ripples.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>skins/fish/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>skins/fish/css/noti.css">
 
     <script src="<?php echo base_url(); ?>js/jquery-1.11.3.min.js" ></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js" ></script>
@@ -24,7 +25,20 @@
     <script>
         $(document).ready(function() {
             $.material.init();
+
+            //Document Click hiding the popup
+            $(document).click(function()
+            {
+                $("#notificationContainer").hide();
+            });
+
+            //Popup on click
+            $("#notificationContainer").click(function()
+            {
+                return false;
+            });
         });
+
     </script>
 </head>
 <body>
@@ -51,6 +65,7 @@
                 <li class="<?php echo ($module === 'home') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">Home</a></li>
                 <li class="<?php echo ($module === 'baivietcuatoi') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">My Posts</a></li>
 
+
             </ul>
             <form class="navbar-form navbar-left" id="searchForm" action=" <?php echo site_url('post/search'); ?>">
                 <div class="form-group">
@@ -58,6 +73,23 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <li id="notification_li">
+                    <a href="#" id="notificationLink">Notifications</a>
+                    <?php if ($count_noti != 0){
+                        ?>
+                        <span id="notification_count"><?php echo $count_noti?></span>
+                        <?php
+                    }?>
+
+                    <div id="notificationContainer">
+                        <div id="notificationTitle">Notifications</div>
+                        <div id="notificationsBody" class="notifications">
+                        </div>
+                        <div id="notificationFooter"><a href="#">See All</a></div>
+                    </div>
+
+                </li>
+
                 <li class="dropdown">
 
                     <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top:10px;padding-bottom:10px;">
@@ -85,7 +117,57 @@
         </div>
     </div>
 </div>
+<div class="noti-box">
+    <div class="row" style="padding:15px">
+        <div class="col-md-1">
+            <span class="glyphicon glyphicon-comment"></span>
+        </div>
+        <div class="col-md-10">
 
+        </div>
+    </div>
+</div>
+<script>
+    var customId = '<?php echo $userid ; ?>' ;
+    console.log("cus"+customId);
+    var socket = io.connect( 'http://localhost:8080' );
+    socket.on('connect',function(data){
+        socket.emit('storeClientIfo', {customId:  customId})
+    });
+    function editNoti(noti_id) {
+        var post_id = $('.noti').attr('id');
+        console.log("A"+post_id);
+        $.ajax({
+            url: '<?php echo site_url('notification/edit_noti/')?>' + noti_id,
+            data: {
+            },
+            type: 'POST',
+            success: function (data) {
+                window.location.href = '<?php echo base_url('/post/post_detail/') ; ?>' + post_id;
+            }
+        });
+    }
+    $('#notificationLink').click(function(){
+        $("#notificationContainer").fadeToggle(300);
+        $("#notification_count").fadeOut("slow");
+        $.ajax({
+            url: '<?php echo site_url('notification/load_noti');?>',
+            type: 'GET',
+            success: function (data) {
+                $('#notificationsBody').html(data);
+            }
+        });
+        return false;
+    });
+    socket.on('message', function(data) {
+        console.log("a"+data.senderId);
+        $('#notification_count').html(function(i,val){
+            return val*1+1;
+        });
+        $('.noti-box').show().fadeOut(10000);
+        $('.noti-box .row .col-md-10').html('<a href="'+ '<?php echo base_url('/post/post_detail/') ; ?>' + data.post_id + ' ">' + data.senderName +' has commented on your post' + '</a>');
+    });
+</script>
 
 <?php flush();?>
 <!--load nhanh hơn-->

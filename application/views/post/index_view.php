@@ -18,6 +18,10 @@
         line-height: 10px;
         /*border-radius: 50%;*/
     }
+    .someclass {
+        color: white;
+        background-color: #18bc9c;
+    }
     .avatar {
         border-radius: 50%;
         width:50px;
@@ -42,17 +46,19 @@
             <?php
                 if ($p['avatar'] ==''){
                     ?>
-                    <img class="col-md-1 col-md-offset-3 img-circle"  src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"
-                         alt="Loading image...">
+                    <a href="<?php echo base_url('/user/profile/') . $p['user_id']; ?>">
+                        <img class="col-md-1 col-md-offset-3 img-circle"  src="<?php echo base_url() . "uploads/images/avatar/default.png"; ?>"
+                             alt="Loading image...">
+                    </a>
+
             <?php
                 }else{
             ?>
-                    <div>
+                    <a href="<?php echo base_url('/user/profile/') . $p['user_id']; ?>">
                         <img class="col-md-1 col-md-offset-3 img-circle" style="height:66px" src="<?php echo base_url().$p['avatar']; ?>"
                              alt="Loading image...">
-                    </div>
-
-            <?php
+                    </a>
+                    <?php
                 }
             ?>
 
@@ -102,7 +108,7 @@
 
                         <div class="card-body">
                             <h4>
-                                <b><a href="<?php echo base_url('/post/post_detail/') . $p['post_id']; ?>"><?php echo $p['name'] ?></a></b>
+                                <b><p><a href="<?php echo base_url('/post/post_detail/') . $p['post_id']; ?>"><?php echo $p['name'] ?></a></p></b>
                             </h4>
                             <p><?php echo $p['description']; ?></p>
                             <p>Giá bán:<?php echo $p['sprice']; ?></p>
@@ -138,7 +144,10 @@
                                                 }
                                                 ?>
                                             </div>
-                                            <b><?php echo $comment['username']; ?></b>
+                                                <a href="<?php echo base_url('/user/profile/') . $comment['user_id']; ?>" style="bottom:0;">
+                                                    <b><?php echo $comment['username']; ?></b>
+                                                </a>
+
                                             <div class="commentText">
                                                 <p class=""><?php echo $comment['content']; ?></p>
                                                 <span class="date sub-text"><?php echo $comment['time']; ?></span>
@@ -280,14 +289,6 @@
 </div><!-- /.modal -->
 <!-- EDIT Modal -->
 <script>
-    var userId = <?php echo $userid ; ?> ;
-    console.log(userId);
-    
-    var socket = io.connect( 'http://localhost:8080' );
-    socket.on('connect',function(data){
-       socket.emit('storeClientIfo', {customId:  userId})
-     //  socket.emit('adduser');
-    });
 
     $('#createNewPost').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
@@ -300,23 +301,29 @@
             var post_id = $(this).attr('id');
             var content = $.trim($('#' + post_id).val());
             var userId =  $.trim($('#userId' + post_id).val());
-            console.log(userId);
-
-            alert("aaa" + post_id + content);
+            var senderId = '<?php echo $userid;?>';
+            var senderName = '<?php echo $username;?>' ;
+            var avatar =  '<?php echo base_url().$useravatar;?>';
+          //  console.log(avatar);
+           // console.log("user"+userId);
             if (check) {
-                socket.emit( 'message', {userId: userId, name: post_id, message: content });
+                socket.emit( 'message', {
+                    avatar: avatar,
+                    userId: userId,
+                    senderId : senderId ,
+                    post_id: post_id,
+                    senderName: senderName,
+                    message: content
+                });
                 $.ajax({
                     url: '<?php echo site_url('comment/add_comment')?>',
                     data: {
                         "content": content,
-                        "post_id": post_id
+                        "post_id": post_id,
+                        "receiver_id": userId
                     },
                     type: 'POST',
-                    beforeSend: function () {
-                        alert("bat dau gui data");
-                    },
                     success: function (data) {
-                        //alert(content);
                         $('#commentList'+post_id).append('<li> <div class="commenterImage">' +
                             '<img src="<?php echo base_url().$useravatar; ?>"  style="height:30px"/> ' +
                             '</div>' +
@@ -331,13 +338,12 @@
                 });
             }
         });
-        socket.on('message', function( data ) {
-            console.log(data);
-        });
+//        socket.on('message', function(data) {
+//            console.log("a"+data.senderId);
+//        });
         $('.deleteButton').click(function(){
             var postId = $(this).data('id');
             console.log(postId);
-//            $(".modal-body #bookId").val(postId);
             $('#deleteConfirm').click(function(){
                 $.ajax({
                     url: '<?php echo site_url('post/delete/')?>'+postId,
@@ -353,6 +359,18 @@
             })
         });
     });
+   var yourstring = location.search.split("search=")[1];
+//        var yourstring = "<?php //echo $_GET['search'] ; ?>//" ;
+    console.log(yourstring);
+    var words = yourstring.split("+");
+    console.log(words);
+    for (var i = 0 ; i < words.length ;i++){
+        $('p:contains('+words[i]+')', document.body).each(function(){
+            $(this).html($(this).html().replace(
+                new RegExp(words[i], 'g'), '<span class=someclass>'+words[i]+'</span>'
+            ));
+        });
+    }
 
+  
 </script>
-
