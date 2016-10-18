@@ -2,8 +2,10 @@
     <?php if (isset($notification)){
         foreach ($notification as $p){
             ?>
-            <li class="noti" style="display: inline-block;" id="<?php echo $p['post_id']?>"
+            <li class="noti" style="display: inline-block;" 
                 onclick=editNoti(<?php echo $p['id']?>);>
+                <input id="noti<?php echo $p['id'];?>" style="display:none;" value="<?php echo $p['post_id'];?>">
+
                 <?php
                 if($p['avatar']==''){
                     ?>

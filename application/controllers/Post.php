@@ -177,7 +177,7 @@ class Post extends MY_Controller
             }
             $edit = $this->Post_model->update_post($post_id,$data);
             if ($edit) {
-                redirect(site_url('post'));
+                redirect(site_url('post/post_detail/').$post_id);
             } else {
                 echo "not ok";
             }
@@ -247,6 +247,7 @@ class Post extends MY_Controller
         $this->_load_left();
         $data = array();
         $data['post'] = $this->Post_model->search($name);
+        $data['search_result'] = count($this->Post_model->search($name));
         $this->load->view("post/index_view.php",$data);// load view
     }
     

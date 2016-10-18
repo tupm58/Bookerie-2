@@ -71,6 +71,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.name');
         $query = $this->db->get();
         $data = $query->result_array();
@@ -85,6 +86,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.name','desc');
         $query = $this->db->get();
         $data = $query->result_array();
@@ -99,6 +101,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.sprice');
         $query = $this->db->get();
         $data = $query->result_array();
@@ -113,6 +116,7 @@ class Post_model extends CI_Model
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.sprice','desc');
         $query = $this->db->get();
         $data = $query->result_array();
@@ -127,6 +131,7 @@ class Post_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
         $parts = explode(" ",$name);
         foreach ($parts as $q){
             $this->db->or_like('post.name', $q);
@@ -151,5 +156,9 @@ class Post_model extends CI_Model
         $query = $this->db->get();
         $data = $query->result_array();
         return $data;
+    }
+    function search_result()
+    {
+        
     }
 }

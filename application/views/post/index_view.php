@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 } ?>
-<style>
+<style xmlns="http://www.w3.org/1999/html">
     .close1 {
         position: absolute;
         top: -8px;
@@ -38,9 +38,21 @@
 <br>
 
 <div>
+    <?php if (isset($search_result)){
+        ?>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-4">
+                <h3><b>Found <span style="color:#18bc9c"><?php echo $search_result; ?></span> results.</b></h3>
 
+            </div>
+        </div>
+
+        <?php
+    } ?>
     <?php foreach ($post as $p): ?>
         <br>
+
+
         <div class="row">
             <input id="userId<?php echo $p['post_id'];?>" class="userId" style="display:none;" value="<?php echo $p['user_id'];?>">
             <?php
@@ -130,6 +142,14 @@
                                     foreach ($p['comments'] as $comment) {
                                         ?>
                                         <li>
+                                            <?php if ($comment['user_id'] == $userid){
+                                            ?>
+                                                <div class="comment-delete" >
+                                                    <span style="display: none;" class="glyphicon glyphicon-remove"></span>
+                                                </div>
+                                                <?php
+                                            }?>
+
                                             <div class="commenterImage">
                                                 <?php if($comment['avatar']==''){
                                                 ?>

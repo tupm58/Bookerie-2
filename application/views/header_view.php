@@ -135,7 +135,9 @@
         socket.emit('storeClientIfo', {customId:  customId})
     });
     function editNoti(noti_id) {
-        var post_id = $('.noti').attr('id');
+//        var post_id = $('#noti' + noti_id).attr('id');
+        var post_id =  $.trim($('#noti' + noti_id).val());
+
         console.log("A"+post_id);
         $.ajax({
             url: '<?php echo site_url('notification/edit_noti/')?>' + noti_id,
@@ -147,6 +149,7 @@
             }
         });
     }
+
     $('#notificationLink').click(function(){
         $("#notificationContainer").fadeToggle(300);
         $("#notification_count").fadeOut("slow");

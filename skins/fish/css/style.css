@@ -171,3 +171,13 @@ textarea{
 /*.btn .btn-warning {*/
     /*background-color: #18bc9c !important;*/
 /*}*/
+
+.comment-delete{
+    float: right;
+    color: #00b09f;
+    display: none;
+}
+.commentList li:hover .comment-delete span {
+    display: block;
+    background-color: red;
+}
