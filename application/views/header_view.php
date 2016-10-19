@@ -75,6 +75,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li id="notification_li">
                     <a href="#" id="notificationLink">Notifications</a>
+<!--                    --><?php // if ($count_noti == 0){
+//                        ?>
+<!--                        <span id="notification_count" >0</span>-->
+<!--                    --><?php
+//                    }
+//                    ?>
                     <?php if ($count_noti != 0){
                         ?>
                         <span id="notification_count"><?php echo $count_noti?></span>
@@ -130,6 +136,8 @@
 <script>
     var customId = '<?php echo $userid ; ?>' ;
     console.log("cus"+customId);
+    var count = '<?php echo $count_noti?>';
+    console.log(count);
     var socket = io.connect( 'http://localhost:8080' );
     socket.on('connect',function(data){
         socket.emit('storeClientIfo', {customId:  customId})
@@ -164,9 +172,15 @@
     });
     socket.on('message', function(data) {
         console.log("a"+data.senderId);
-        $('#notification_count').html(function(i,val){
-            return val*1+1;
-        });
+        if (count==0){
+            $('#notification_li').append( '<span id="notification_count">1</span>');
+            count = count +1;
+        }else{
+            $('#notification_count').html(function(i,val){
+                return val*1+1;
+            });
+        }
+
         $('.noti-box').show().fadeOut(10000);
         $('.noti-box .row .col-md-10').html('<a href="'+ '<?php echo base_url('/post/post_detail/') ; ?>' + data.post_id + ' ">' + data.senderName +' has commented on your post' + '</a>');
     });
