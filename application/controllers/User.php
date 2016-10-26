@@ -54,7 +54,7 @@ class User extends MY_Controller
                     'username' => $username,
                     'password' => $password,
                     'email' => $email,
-                    'status'=> 1,
+                    'user_status'=> 1,
                     'level' => 3,
                     'create' => date('y-m-d')
 

@@ -63,7 +63,7 @@
         <div class="navbar-collapse collapse navbar-warning-collapse">
             <ul class="nav navbar-nav">
                 <li class="<?php echo ($module === 'home') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">Home</a></li>
-                <li class="<?php echo ($module === 'baivietcuatoi') ? 'active' : ''; ?>"><a href="<?php echo site_url('post'); ?>">My Posts</a></li>
+<!--                <li class="--><?php //echo ($module === 'baivietcuatoi') ? 'active' : ''; ?><!--"><a href="--><?php //echo site_url('post'); ?><!--">My Posts</a></li>-->
 
 
             </ul>
@@ -73,28 +73,28 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li id="notification_li">
-                    <a href="#" id="notificationLink">Notifications</a>
-<!--                    --><?php // if ($count_noti == 0){
-//                        ?>
-<!--                        <span id="notification_count" >0</span>-->
-<!--                    --><?php
-//                    }
-//                    ?>
-                    <?php if ($count_noti != 0){
-                        ?>
-                        <span id="notification_count"><?php echo $count_noti?></span>
-                        <?php
-                    }?>
+                <?php if ($userid != ''){
+                    ?>
+                    <li id="notification_li">
+                        <a href="#" id="notificationLink">Notifications</a>
+                        <?php if ($count_noti != 0){
+                            ?>
+                            <span id="notification_count"><?php echo $count_noti?></span>
+                            <?php
+                        }?>
 
-                    <div id="notificationContainer">
-                        <div id="notificationTitle">Notifications</div>
-                        <div id="notificationsBody" class="notifications">
+                        <div id="notificationContainer">
+                            <div id="notificationTitle">Notifications</div>
+                            <div id="notificationsBody" class="notifications">
+                            </div>
+                            <div id="notificationFooter"><a href="#">See All</a></div>
                         </div>
-                        <div id="notificationFooter"><a href="#">See All</a></div>
-                    </div>
 
-                </li>
+                    </li>
+                <?php
+                }
+                ?>
+
 
                 <li class="dropdown">
 
@@ -143,7 +143,6 @@
         socket.emit('storeClientIfo', {customId:  customId})
     });
     function editNoti(noti_id) {
-//        var post_id = $('#noti' + noti_id).attr('id');
         var post_id =  $.trim($('#noti' + noti_id).val());
 
         console.log("A"+post_id);

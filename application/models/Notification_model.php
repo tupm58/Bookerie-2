@@ -29,6 +29,8 @@ class Notification_model extends CI_Model
         $this->db->join('post','post.post_id = notification.post_id');
         $this->db->from('notification');
         $this->db->where('receiver_id',$user_id);
+        $this->db->order_by('notification.time','DESC');
+
         $this->db->where('seen',0);
         $query = $this->db->get();
         $data = $query->result_array();

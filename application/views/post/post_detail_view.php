@@ -101,8 +101,8 @@
                             <b><a href="<?php echo base_url('/post/post_detail/') . $p['post_id']; ?>"><?php echo $p['name'] ?></a></b>
                         </h4>
                         <p><?php echo $p['description']; ?></p>
-                        <p>Giá bán:<?php echo $p['sprice']; ?></p>
-                        <p>Chất lượng: <?php echo $p['content']; ?> </p>
+                        <p>Price(VND): <?php echo $p['sprice']; ?></p>
+                        <p>Quality: <?php echo $p['content']; ?> </p>
                     </div>
                     <footer class="card-footer">
                         <div style="margin-left:15px">
@@ -283,15 +283,18 @@
             var post_id = $(this).attr('id');
             var content = $.trim($('#' + post_id).val());
             var userId =  $.trim($('#userId' + post_id).val());
+            var senderId = '<?php echo $userid;?>';
+            var senderName = '<?php echo $username;?>' ;
             var avatar =  '<?php echo base_url().$useravatar;?>';
-            console.log(avatar);
-            console.log("user"+userId);
+            //  console.log(avatar);
+            // console.log("user"+userId);
             if (check) {
                 socket.emit( 'message', {
                     avatar: avatar,
                     userId: userId,
                     senderId : senderId ,
                     post_id: post_id,
+                    senderName: senderName,
                     message: content
                 });
                 $.ajax({
@@ -317,7 +320,9 @@
                 });
             }
         });
-
+//        socket.on('message', function(data) {
+//            console.log("a"+data.senderId);
+//        });
         $('.deleteButton').click(function(){
             var postId = $(this).data('id');
             console.log(postId);
@@ -325,9 +330,9 @@
                 $.ajax({
                     url: '<?php echo site_url('post/delete/')?>'+postId,
                     type: 'DELETE',
-                    beforeSend: function () {
-                        alert("bat dau gui data");
-                    },
+//                    beforeSend: function () {
+//                        alert("bat dau gui data");
+//                    },
                     success: function (data) {
                         alert("success");
                         location.reload();

@@ -87,21 +87,21 @@
                 </div>
             </div><!-- /header-text -->
             <div class="carousel-caption">
-                <h2>Caption 1</h2>
+                <h2>Bookerie</h2>
             </div>
         </div>
         <div class="item">
             <!-- Set the second background image using inline CSS below. -->
             <div class="fill" style="background-image:url('<?php echo base_url(); ?>skins/fish/images/cover2.png');"></div>
             <div class="carousel-caption">
-                <h2>Caption 2</h2>
+                <h2>Bookerie 2</h2>
             </div>
         </div>
         <div class="item">
             <!-- Set the third background image using inline CSS below. -->
             <div class="fill" style="background-image:url('<?php echo base_url(); ?>skins/fish/images/cover3.png');"></div>
             <div class="carousel-caption">
-                <h2>Caption 3</h2>
+                <h2>Bookerie 3</h2>
             </div>
         </div>
     </div>
@@ -121,13 +121,18 @@
         <div class="main" id="about">
             <section  style="background-color:white">
                 <div class="row">
-                    <h2 style="text-align: center;padding-top: 100px; color: #2c3e50"><b>About</b></h2>
+                    <h3 style="text-align: center;padding-top: 100px; color: #2c3e50"><b>About</b></h3>
                 </div>
                 <hr>
                 <br>
                 <div class="row">
                     <div class="col-md-3 col-md-offset-1">
                         <img src="<?php echo base_url(); ?>skins/fish/images/book1.jpg" alt="" width="550px" height="270px">
+                    </div>
+                    <div class="col-md-4 col-md-offset-3">
+                        <h3>Bookerie is a social network to communicate people loving books</h3>
+                        <br>
+                        <h4>Share your books to share the world</h4>
                     </div>
                 </div>
             </section>
@@ -183,6 +188,8 @@
                     <h1 style="color: #2c3e50"><b>Register</b></h1>
                     <br>
                     <h4  style="color: #2c3e50" ><b>Create an account to sell book!!</b></h4>
+                    <br>
+                    <img src="<?php echo base_url(); ?>skins/fish/images/cover-4.jpg" alt="" width="300px" height="150px">
                 </div>
                 <div class="col-md-1">
 

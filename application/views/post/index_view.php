@@ -51,8 +51,6 @@
     } ?>
     <?php foreach ($post as $p): ?>
         <br>
-
-
         <div class="row">
             <input id="userId<?php echo $p['post_id'];?>" class="userId" style="display:none;" value="<?php echo $p['user_id'];?>">
             <?php
@@ -123,8 +121,8 @@
                                 <b><p><a href="<?php echo base_url('/post/post_detail/') . $p['post_id']; ?>"><?php echo $p['name'] ?></a></p></b>
                             </h4>
                             <p><?php echo $p['description']; ?></p>
-                            <p>Giá bán:<?php echo $p['sprice']; ?></p>
-                            <p>Chất lượng: <?php echo $p['content']; ?> </p>
+                            <p>Price (VND): <?php echo $p['sprice']; ?></p>
+                            <p>Quality: <?php echo $p['content']; ?> </p>
                         </div>
                         <footer class="card-footer">
                             <div style="margin-left:15px">
@@ -368,9 +366,9 @@
                 $.ajax({
                     url: '<?php echo site_url('post/delete/')?>'+postId,
                     type: 'DELETE',
-                    beforeSend: function () {
-                        alert("bat dau gui data");
-                    },
+//                    beforeSend: function () {
+//                        alert("bat dau gui data");
+//                    },
                     success: function (data) {
                         alert("success");
                         location.reload();
@@ -380,7 +378,6 @@
         });
     });
    var yourstring = location.search.split("search=")[1];
-//        var yourstring = "<?php //echo $_GET['search'] ; ?>//" ;
     console.log(yourstring);
     var words = yourstring.split("+");
     console.log(words);

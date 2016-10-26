@@ -42,7 +42,7 @@ class Post extends MY_Controller
         $this->User_model->find_user_by_id($user_id);
         $data = array();
         $data['post'] = $this->Post_model->load_all_posts();
-        
+
         $this->load->view("post/index_view.php",$data);// load view
     }
 
@@ -87,7 +87,7 @@ class Post extends MY_Controller
                 'oprice' => $oprice,
                 'sprice' => $sprice,
                 'description' => $description,
-                'time' => date('y-m-d'),
+                'time' => date('Y-m-d H:i:s'),
                 'image' => $img_path,
                 'user_id' => $user_id
             );

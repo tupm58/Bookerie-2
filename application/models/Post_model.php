@@ -29,6 +29,8 @@ class Post_model extends CI_Model
         $this->db->join('user','user.user_id = post.user_id');
         $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.time','DESC');
+        $this->db->where('post.status',0);
+   
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
@@ -43,7 +45,7 @@ class Post_model extends CI_Model
         $this->db->from('post');
         $this->db->join('user','user.user_id = post.user_id');
         $this->db->join('quality','post.quality = quality.quality_id');
-        $this->db->where('post_id',$post_id);
+        $this->db->where('post_id',$post_id)->where('post.status',0);
         $query = $this->db->get();
         $data = $query->row_array();
         $comments = $this->Comment_model->load_comment($post_id);
@@ -73,6 +75,7 @@ class Post_model extends CI_Model
         $this->db->join('user','user.user_id = post.user_id');
         $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.name');
+        $this->db->where('post.status',0);
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
@@ -88,6 +91,7 @@ class Post_model extends CI_Model
         $this->db->join('user','user.user_id = post.user_id');
         $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.name','desc');
+        $this->db->where('post.status',0);
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
@@ -103,6 +107,8 @@ class Post_model extends CI_Model
         $this->db->join('user','user.user_id = post.user_id');
         $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.sprice');
+        $this->db->where('post.status',0);
+
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
@@ -118,6 +124,8 @@ class Post_model extends CI_Model
         $this->db->join('user','user.user_id = post.user_id');
         $this->db->join('quality','post.quality = quality.quality_id');
         $this->db->order_by('post.sprice','desc');
+        $this->db->where('post.status',0);
+
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
@@ -139,6 +147,8 @@ class Post_model extends CI_Model
         }
 
         $this->db->from('post');
+        $this->db->where('post.status',0);
+
         $query = $this->db->get();
         $data = $query->result_array();
         for ($i =0 ; $i <count($data); $i++){
@@ -152,13 +162,29 @@ class Post_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('post');
-        $this->db->where('user_id',$user_id);
+        $this->db->where('user_id',$user_id)->where('post.status',0);
         $query = $this->db->get();
         $data = $query->result_array();
         return $data;
     }
-    function search_result()
+    function load_post_limit($limit,$time)
     {
-        
+
+        $this->db->select('*');
+        $this->db->from('post');
+        $this->db->join('user','user.user_id = post.user_id');
+        $this->db->join('quality','post.quality = quality.quality_id');
+        $this->db->order_by('post.time','DESC');
+        $this->db->where('post.status',0)->where('post.time' > strtotime($time));
+        echo "aaa".strtotime($time);
+        echo "bbb".$time;
+        $this->db->limit($limit);
+        $query = $this->db->get();
+        $data = $query->result_array();
+        for ($i =0 ; $i <count($data); $i++){
+            $comments = $this->Comment_model->load_comment($data[$i]['post_id']);
+            $data[$i]['comments'] = $comments;
+        }
+        return $data;
     }
 }
